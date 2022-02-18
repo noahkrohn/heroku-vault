@@ -1,13 +1,14 @@
 name: 'heroku-vault'
 on:
   push:
-    branches: [ main ]
+    branches: [ development ]
   pull_request:
     branches: [ main ]
   workflow_dispatch:
 
 jobs:
   build:
+    name: heroku-vault-deploy
     runs-on: ubuntu-latest
     environment: PROD
     defaults:
@@ -29,4 +30,4 @@ jobs:
           echo "  password ${{ secrets.HEROKU_API_KEY }}" >> ~/.netrc
 
       - name: Install Heroku CLI
-        run: sudo snap install --classic heroku
+        run: curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
